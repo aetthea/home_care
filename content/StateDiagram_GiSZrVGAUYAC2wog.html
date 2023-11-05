@@ -1,0 +1,397 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>State Machine Diagram - State Machine Diagram1</title>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+			</tr>
+			<tr>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		Perencanaan Perawatan Rumahan (Home Care Plan)	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			State Machine Diagram - State Machine Diagram1		</span>
+<a onclick="javascript: showVpLink('Perencanaan Perawatan Rumahan (Home Care Plan).vpp://diagram/GiSZrVGAUYAC2wog', 'State Machine Diagram1\nPerencanaan Perawatan Rumahan (Home Care Plan).vpp://diagram/GiSZrVGAUYAC2wog', 'State Machine Diagram1', this); return false;" style="padding-left: 16px; font-size: 12px" href="#"><img src="../images/icons/link.png" border="0"> link</a>	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|333.0|272.0|106.0|40.0|State2_k0hZrVGAUYAC2wpy.html|State2_k0hZrVGAUYAC2wpy.html|k0hZrVGAUYAC2wpx" id="optionk0hZrVGAUYAC2wpx">No longer needed : State</option>
+<option value="shape|309.0|140.0|80.0|40.0|State2_U6_ZrVGAUYAC2wpn.html|State2_U6_ZrVGAUYAC2wpn.html|U6.ZrVGAUYAC2wpm" id="optionU6.ZrVGAUYAC2wpm">Resolved : State</option>
+<option value="shape|131.0|232.0|138.0|40.0|State2_su2ZrVGAUYAC2wpS.html|State2_su2ZrVGAUYAC2wpS.html|su2ZrVGAUYAC2wpR" id="optionsu2ZrVGAUYAC2wpR">Appointment scheduled : State</option>
+<option value="shape|173.0|72.0|144.0|40.0|State2_ZiGZrVGAUYAC2wpH.html|State2_ZiGZrVGAUYAC2wpH.html|ZiGZrVGAUYAC2wpG" id="optionZiGZrVGAUYAC2wpG">Conversation In progress : State</option>
+<option value="shape|2.0|140.0|80.0|40.0|State2_twaZrVGAUYAC2wo_.html|State2_twaZrVGAUYAC2wo_.html|VwaZrVGAUYAC2wo9" id="optionVwaZrVGAUYAC2wo9">Launched : State</option>
+<option value="shape|32.0|2.0|20.0|20.0|InitialPseudoState_r2SZrVGAUYAC2wou.html|InitialPseudoState_r2SZrVGAUYAC2wou.html|z2SZrVGAUYAC2wot" id="optionz2SZrVGAUYAC2wot">Unnamed Initial Pseudo State : Initial Pseudo State</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/State_Machine_Diagram1.png" usemap="#diagram_map" class="Image" width="443" height="316"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="35.0, 22.0, 35.0, 140.0, 49.0, 140.0, 49.0, 22.0" coords2="35.0, 22.0, 35.0, 140.0, 49.0, 140.0, 49.0, 22.0" shape="poly" alt=":Transition" id="areadiagram_map_aBpZrVGAUYAC2wqH_default" href="Transition2_cBpZrVGAUYAC2wqG.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="56.0, 82.0, 56.0, 85.0, 53.0, 85.0, 53.0, 99.0, 56.0, 99.0, 56.0, 140.0, 70.0, 140.0, 70.0, 99.0, 173.0, 99.0, 173.0, 85.0, 70.0, 85.0, 70.0, 82.0" coords2="56.0, 82.0, 56.0, 85.0, 53.0, 85.0, 53.0, 99.0, 56.0, 99.0, 56.0, 140.0, 70.0, 140.0, 70.0, 99.0, 173.0, 99.0, 173.0, 85.0, 70.0, 85.0, 70.0, 82.0" shape="poly" alt=":Transition" id="areadiagram_map_xf5ZrVGAUYAC2wqY_default" href="Transition2_uf5ZrVGAUYAC2wqX.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="56.0, 180.0, 56.0, 248.0, 53.0, 248.0, 53.0, 262.0, 56.0, 262.0, 56.0, 265.0, 70.0, 265.0, 70.0, 262.0, 131.0, 262.0, 131.0, 248.0, 70.0, 248.0, 70.0, 180.0" coords2="56.0, 180.0, 56.0, 248.0, 53.0, 248.0, 53.0, 262.0, 56.0, 262.0, 56.0, 265.0, 70.0, 265.0, 70.0, 262.0, 131.0, 262.0, 131.0, 248.0, 70.0, 248.0, 70.0, 180.0" shape="poly" alt=":Transition" id="areadiagram_map_bxVZrVGAUYAC2wqp_default" href="Transition2_TxVZrVGAUYAC2wqo.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="350.0, 82.0, 350.0, 85.0, 317.0, 85.0, 317.0, 99.0, 350.0, 99.0, 350.0, 140.0, 364.0, 140.0, 364.0, 99.0, 367.0, 99.0, 367.0, 85.0, 364.0, 85.0, 364.0, 82.0" coords2="350.0, 82.0, 350.0, 85.0, 317.0, 85.0, 317.0, 99.0, 350.0, 99.0, 350.0, 140.0, 364.0, 140.0, 364.0, 99.0, 367.0, 99.0, 367.0, 85.0, 364.0, 85.0, 364.0, 82.0" shape="poly" alt=":Transition" id="areadiagram_map_PbNZrVGAUYAC2wqz_default" href="Transition2_rbNZrVGAUYAC2wqy.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="320.0, 180.0, 320.0, 245.0, 269.0, 245.0, 269.0, 259.0, 320.0, 259.0, 320.0, 262.0, 334.0, 262.0, 334.0, 259.0, 337.0, 259.0, 337.0, 245.0, 334.0, 245.0, 334.0, 180.0" coords2="320.0, 180.0, 320.0, 245.0, 269.0, 245.0, 269.0, 259.0, 320.0, 259.0, 320.0, 262.0, 334.0, 262.0, 334.0, 259.0, 337.0, 259.0, 337.0, 245.0, 334.0, 245.0, 334.0, 180.0" shape="poly" alt=":Transition" id="areadiagram_map_Ks9ZrVGAUYAC2wq9_default" href="Transition2_8s9ZrVGAUYAC2wq8.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="363.0, 180.0, 363.0, 272.0, 377.0, 272.0, 377.0, 180.0" coords2="363.0, 180.0, 363.0, 272.0, 377.0, 272.0, 377.0, 180.0" shape="poly" alt=":Transition" id="areadiagram_map_DUTZrVGAUYAC2wrL_default" href="Transition2_FUTZrVGAUYAC2wrK.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="26.0, 180.0, 26.0, 285.0, 23.0, 285.0, 23.0, 299.0, 26.0, 299.0, 26.0, 302.0, 40.0, 302.0, 40.0, 299.0, 333.0, 299.0, 333.0, 285.0, 40.0, 285.0, 40.0, 180.0" coords2="26.0, 180.0, 26.0, 285.0, 23.0, 285.0, 23.0, 299.0, 26.0, 299.0, 26.0, 302.0, 40.0, 302.0, 40.0, 299.0, 333.0, 299.0, 333.0, 285.0, 40.0, 285.0, 40.0, 180.0" shape="poly" alt=":Transition" id="areadiagram_map_ZhzZrVGAUYAC2wrU_default" href="Transition2__hzZrVGAUYAC2wrT.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      NLN state rule: either resolveTime &amp;​gt; now or inMyCare = no
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="333, 272, 439, 312" coords2="333, 272, 439, 312" shape="rect" alt="No longer needed:State" id="areadiagram_map_k0hZrVGAUYAC2wpx_default" href="State2_k0hZrVGAUYAC2wpy.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Resolved state rule : and
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      resolveDate =non-null
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      resolveTime =non-null
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="309, 140, 389, 180" coords2="309, 140, 389, 180" shape="rect" alt="Resolved:State" id="areadiagram_map_U6.ZrVGAUYAC2wpm_default" href="State2_U6_ZrVGAUYAC2wpn.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Appointment scheduled state rule : conversationDate &amp;​gt; today
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="131, 232, 269, 272" coords2="131, 232, 269, 272" shape="rect" alt="Appointment scheduled:State" id="areadiagram_map_su2ZrVGAUYAC2wpR_default" href="State2_su2ZrVGAUYAC2wpS.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      CIP state rule: and conversDate= today
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      conversTime = &amp;quot;recent&amp;quot;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="173, 72, 317, 112" coords2="173, 72, 317, 112" shape="rect" alt="Conversation In progress:State" id="areadiagram_map_ZiGZrVGAUYAC2wpG_default" href="State2_ZiGZrVGAUYAC2wpH.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Launched state rule: and launchDate = non-null launchTIme = non-null all 
+      other state defining atts = null
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="2, 140, 82, 180" coords2="2, 140, 82, 180" shape="rect" alt="Launched:State" id="areadiagram_map_VwaZrVGAUYAC2wo9_default" href="State2_twaZrVGAUYAC2wo_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="32, 2, 52, 22" coords2="32, 2, 52, 22" shape="rect" alt=":Initial Pseudo State" id="areadiagram_map_z2SZrVGAUYAC2wot_default" href="InitialPseudoState_r2SZrVGAUYAC2wou.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Model Elements			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Name</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/State.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/State.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="State2_k0hZrVGAUYAC2wpy.html" class="ItemLink">No longer needed : State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      NLN state rule: either resolveTime &gt; now or inMyCare = no
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/State.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/State.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="State2_U6_ZrVGAUYAC2wpn.html" class="ItemLink">Resolved : State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Resolved state rule : and
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      resolveDate =non-null
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      resolveTime =non-null
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/State.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/State.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="State2_su2ZrVGAUYAC2wpS.html" class="ItemLink">Appointment scheduled : State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Appointment scheduled state rule : conversationDate &gt; today
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/State.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/State.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="State2_ZiGZrVGAUYAC2wpH.html" class="ItemLink">Conversation In progress : State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      CIP state rule: and conversDate= today
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      conversTime = &quot;recent&quot;
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/State.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/State.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="State2_twaZrVGAUYAC2wo_.html" class="ItemLink">Launched : State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Launched state rule: and launchDate = non-null launchTIme = non-null all 
+      other state defining atts = null
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/InitialPseudoState.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/InitialPseudoState.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InitialPseudoState_r2SZrVGAUYAC2wou.html" class="ItemLink">N/A : Initial Pseudo State</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		Perencanaan Perawatan Rumahan (Home Care Plan)	</div>
+</body>
+</html>
